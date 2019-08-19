@@ -4,6 +4,29 @@ def get_new_value(old_gen, old_automata):
     # TBC - add code to generate the next row of cells,
     # then replace the return statement below to
     # return the updated automata
+    row_length = 49      # was 49 to begin with
+    start_at = (old_gen + 1)*row_length 
+    if old_gen == row_length:
+        return 0
+
+    #new_automata = [0]*2401
+    # For every value in the list, look at its left and right neighbors to decide its value
+    for i in range(start_at, start_at + row_length):
+        if i == start_at:
+            if old_automata[i - row_length] == 1 or old_automata[i+1 -row_length] == 1:
+                old_automata[i] = 1
+            
+        elif i == start_at + row_length - 1:
+            if old_automata[i - row_length] == 1 or old_automata[i-1 - row_length] == 1:
+                old_automata[i] = 1
+            
+        elif i >= 2401:
+            pass
+        elif ( old_automata[i-1 - row_length] == old_automata[i - row_length]) and  (old_automata[i - row_length] == old_automata[i+1 - row_length] ):
+            pass
+        else:
+            old_automata[i] = 1
+
     return old_automata
 
 # Define some colors and other constants
